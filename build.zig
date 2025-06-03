@@ -10,7 +10,6 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
     
-
     const exe = b.addExecutable(.{
         .name = "MCCzig",
         .root_module = exe_mod,
