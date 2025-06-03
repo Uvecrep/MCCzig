@@ -27,6 +27,84 @@ pub fn main() !void {
                     std.debug.print("SDL_QUIT event received, exiting...\n", .{});
                     break :main_loop;
                 },
+                sdl.consts.SDL_KEYDOWN => {
+                    const key = event.key.keysym.sym;
+                    const mods = event.key.keysym.mod;
+
+                    if (mods & sdl.consts.KMOD_SHIFT != 0 and key != sdl.consts.SDLK_LEFTSHIFT and key != sdl.consts.SDLK_RIGHTSHIFT) {
+                        std.debug.print("Shift + ", .{});
+                    }
+                    else if (mods & sdl.consts.KMOD_CTRL != 0 and key != sdl.consts.SDLK_LEFTCONTROL and key != sdl.consts.SDLK_RIGHTCONTROL) {
+                        std.debug.print("Ctrl  + ", .{});
+                    }
+                    else if (mods & sdl.consts.KMOD_ALT != 0 and key != sdl.consts.SDLK_LEFTALT and key != sdl.consts.SDLK_RIGHTALT) {
+                        std.debug.print("Alt + ", .{});
+                    }
+
+                    switch (key) {
+                        sdl.consts.SDLK_ESCAPE => {
+                            std.debug.print("ESCAPE key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_LEFT => {
+                            std.debug.print("Left Arrow pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_RIGHT => {
+                            std.debug.print("Right Arrow key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_UP => {
+                            std.debug.print("Up Arrow key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_DOWN => {
+                            std.debug.print("Down Arrow key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_SPACE => {
+                            std.debug.print("SPACE key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_RETURN => {
+                            std.debug.print("RETURN key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_BACKSPACE => {
+                            std.debug.print("BACKSPACE key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_TAB => {
+                            std.debug.print("TAB key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_LEFTCONTROL => {
+                            std.debug.print("Left Control key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_RIGHTCONTROL => {
+                            std.debug.print("Right Control key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_LEFTALT => {
+                            std.debug.print("Left Alt key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_RIGHTALT => {
+                            std.debug.print("Right Alt key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_LEFTSHIFT => {
+                            std.debug.print("Left Shift key pressed\n", .{});
+                        },
+                        sdl.consts.SDLK_RIGHTSHIFT => {
+                            std.debug.print("Right Shift key pressed\n", .{});
+                        },                   
+                        else => {},
+                    }
+                },
+                sdl.consts.SDL_KEYUP => {
+                    std.debug.print("KEYUP event detected\n", .{});
+                },
+                sdl.consts.SDL_MOUSEMOTION => {
+                    std.debug.print("Mouse Motion event detected\n", .{});
+                },
+                sdl.consts.SDL_MOUSEBUTTONDOWN => {
+                    std.debug.print("Mouse Button Down event detected\n", .{});
+                }, 
+                sdl.consts.SDL_MOUSEBUTTONUP => {
+                    std.debug.print("Mouse Button Up event detected\n", .{});
+                },
+                sdl.consts.SDL_MOUSEWHEEL => {
+                    std.debug.print("Mouse Wheel event detected\n", .{});
+                },
                 else => {},
             }
         }

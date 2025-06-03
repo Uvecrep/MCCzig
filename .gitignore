@@ -1,4 +1,4 @@
+.cursor/
 .zig-cache/
 zig-out/
 *.o/
-.cursorcontext

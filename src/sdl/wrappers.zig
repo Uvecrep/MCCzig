@@ -1,6 +1,8 @@
 const std = @import("std");
 const sdl = @import("sdl");
 
+// SDL Initialization
+
 pub fn init(subsystems: u32) !void {
     if (sdl.funcs.SDL_Init(subsystems) != 0) {
         std.log.err("SDL_Init failed: {s}\n", .{sdl.funcs.SDL_GetError()});
@@ -12,6 +14,8 @@ pub fn init(subsystems: u32) !void {
 pub fn quit() void {
     sdl.funcs.SDL_Quit();
 }
+
+// Window Management
 
 pub fn createWindow(
     title: [*:0]const u8,
@@ -30,6 +34,8 @@ pub fn createWindow(
 pub fn destroyWindow(win: *sdl.types.SDL_Window) void {
     sdl.funcs.SDL_DestroyWindow(win);
 }
+
+// Renderer Management
 
 pub fn createRenderer(
     window: *sdl.types.SDL_Window,
@@ -79,6 +85,8 @@ pub fn renderDrawPoint(
     }
 }
 
+// Event Handling
+
 pub fn pollEvent(event: *sdl.types.SDL_Event) !bool {
     const result = sdl.funcs.SDL_PollEvent(event);
     if (result < 0){
@@ -88,12 +96,32 @@ pub fn pollEvent(event: *sdl.types.SDL_Event) !bool {
     return result != 0;
 }
 
+// Timing
+
 pub fn delay(ms: u32) void {
     sdl.funcs.SDL_Delay(ms);
 }
 
+// Error Handling
+
 pub fn getError() [*:0]const u8 {
     return sdl.funcs.SDL_GetError();
+}
+
+// Keyboard State Query
+
+pub fn getKeyboardState(numkeys: ?*c_int) [*]const u8 {
+    return sdl.funcs.SDL_GetKeyboardState(numkeys);
+}
+
+// Mouse State Queries
+
+pub fn getMouseState(x: ?*c_int, y: ?*c_int) u32 {
+    return sdl.funcs.SDL_GetMouseState(x, y);
+}
+
+pub fn getRelativeMouseState(x: ?*c_int, y: ?*c_int) u32 {
+    return sdl.funcs.SDL_GetRelativeMouseState(x, y);
 }
 
 test "SDL init succeeds on 0" {

@@ -128,9 +128,9 @@ Create foundation to scale the rest of the project up from
 DONE:
 SDL2 integration and basic window management
 Basic rendering setup
+Expand SDL2 wrapper functions for input handling (keyboard, mouse)
 
 TODO:
-Expand SDL2 wrapper functions for input handling (keyboard, mouse)
 Add basic math utilities (vectors, matrices, color handling)
 Create a resource management system (textures, fonts)
 
